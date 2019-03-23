@@ -3,8 +3,8 @@ session_start();
 require_once 'RPC.php';
 use rabbit\RPC;
 
-$forums_rpc = new RPC("ForumsExchange");
-$getForums = "getForums";
+$forums_rpc = new RPC("messageboardExchange");
+$getForums = serialize(array("getForums"));
 $response = $forums_rpc->call($getForums);
 ?>
 
@@ -17,13 +17,13 @@ $response = $forums_rpc->call($getForums);
 		$unserArr = unserialize($response);
 		foreach ($unserArr as $forumArr){
 			echo
-			"<table>
+			'<table>
 				<tr>
 					<td>
-						<a href=\"threads.php?\"> . $forumArr .</a>
-					</td>
+                        		<a href="threads.php?forumID=' . $forumArr['ForumID'] . '&forumName=' . $forumArr['Name'] . '>' . $forumArr['Name'] .'</a>
+                    			</td>
 				</tr>
-			</table>";
+			</table>';
 		}
 		?>
 	</div>

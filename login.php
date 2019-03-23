@@ -6,7 +6,7 @@ use rabbit\RPC;
 if(!empty($_POST)){
 	$login_rpc = new RPC("LoginExchange");
 	$user = $_POST['loginUN'];
-	$usernamepasswd = serialize(array($user, $_POST['loginPW']);
+	$usernamepasswd = serialize(array($user, $_POST['loginPW']));
 	$response = $login_rpc->call($usernamepasswd);
 	if ($response==="S"){
 		$_SESSION['username'] = $user;
@@ -19,7 +19,7 @@ if(!empty($_POST)){
 
 if(isset($_GET['success'])){
 	if($_GET['success']==="F"){
-		echo "<script type='text/javascript'>alert("Failed to Log In! Try Again.");</script>";
+		echo "<script type='text/javascript'>alert('Failed to Log In! Try Again.');</script>";
 	}
 }
 ?>

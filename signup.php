@@ -6,7 +6,7 @@ use rabbit\RPC;
 if(!empty($_POST)){
 	$signup_rpc = new RPC("SignupExchange");
 	$user = $_POST['signUN'];
-	$usernamepasswd = serialize(array($user, $_POST['signPW']);
+	$usernamepasswd = serialize(array($user, $_POST['signPW']));
 	$response = $login_rpc->call($usernamepasswd);
 	if ($response==="S"){
 		header('Location: login.php');
@@ -18,7 +18,7 @@ if(!empty($_POST)){
 
 if(isset($_GET['success'])){
 	if($_GET['success']==="F"){
-		echo "<script type='text/javascript'>alert("Error! Username may have already been registered. Try Again.");</script>";
+		echo "<script type='text/javascript'>alert('Error! Username may have already been registered. Try Again.');</script>";
 	}
 }
 ?>

@@ -7,6 +7,7 @@ session_start();
 	<title>IT490 Midterm</title>
 	<link rel="stylesheet" type="text/css" href="style.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="js/scripts.js"></script>
 </head>
 <body>
 	<div class="navBar">
