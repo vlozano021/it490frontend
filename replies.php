@@ -67,6 +67,14 @@ if(isset($_GET['success'])){
 			<input type="submit" name="createReplySubmit" value="Submit">
 		</form>
 		<button type="button" id="showAddReply" onclick="showAddReply()">Add Reply</button>
+		<script>
+			$(document).ready(function(){
+			    $("#formButton").click(function(){
+			        $("#form1").show();
+			        $(this).hide();
+			    });
+			});
+		</script>
 	</div>
 </div>
 
