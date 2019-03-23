@@ -29,7 +29,7 @@ class RPC
 
 		$this->channel = $connection->channel();
 		$this->channel->exchange_declare($exchange, 'direct', false, false, false);
-		list($this->callback_queue,, ) = $this->channel->queue_declare('', false, false, true, false);
+		list($this->callback_queue,, ) = $this->channel->queue_declare('', false, true, false, false);
 		$this->channel->queue_bind($queue_name, $exchange, $exchange . '_req');
 		$this->channel->basic_consume(
 			$this->callback_queue,
@@ -70,3 +70,4 @@ class RPC
 		return $this->response;
 	}
 }
+?>
