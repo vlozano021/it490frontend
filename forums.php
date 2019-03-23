@@ -17,13 +17,13 @@ $response = $forums_rpc->call($getForums);
 		$unserArr = unserialize($response);
 		foreach ($unserArr as $forumArr){
 			echo
-			"<table>
+			'<table>
 				<tr>
 					<td>
-						<a href=\"threads.php?\"> . $forumArr .</a>
+						<a href="threads.php?forumID=' . $forumArr['ForumID'] . '>' . $forumArr['Name'] .'</a>
 					</td>
 				</tr>
-			</table>";
+			</table>';
 		}
 		?>
 	</div>
