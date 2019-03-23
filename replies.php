@@ -19,7 +19,7 @@ if(!empty($_POST)){
 		header('Refresh:0')
 	}
 	else {
-		header('Refresh:0');
+		header('Location: replies.php?success=F');
 	}
 }
 
