@@ -8,22 +8,22 @@ require_once 'RPC.php';
 use rabbit\RPC;
 
 $threads_rpc = new RPC("messageboardExchange");
-$_SESSION['ThreadID'] = $_GET['threadID'];
-$getReplies = serialize(array("getReplies", $_SESSION['ThreadID']));
+$threadID = $_GET['threadID'];
+$getReplies = serialize(array("getReplies", $threadID));
 $response = $threads_rpc->call($getReplies);
-$getThread = serialize(array("getThread", $_SESSION['ThreadID']));
+$getThread = serialize(array("getThread", $threadID));
 $response1 = $threads_rpc->call($getThread);
 
 if(!empty($_POST)){
 	$createReplies_rpc = new RPC("createExchange");
-	$replyINFO = array($_SESSION['ThreadID'], $_POST['Content'], $_SESSION['User']);
+	$replyINFO = array($threadID, $_POST['Content'], $_SESSION['User']);
 	$createReplies = serialize(array("createThreads", $replyINFO));
 	$response2 = $threads_rpc->call($createReplies);
 	if ($response2==="S"){
 		header('Refresh:0')
 	}
 	else {
-		header('Location: replies.php?success=F');
+		header('Location: replies.php?threadID=' . $threadID . '&success=F');
 	}
 }
 
