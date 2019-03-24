@@ -4,27 +4,25 @@ require_once 'RPC.php';
 use rabbit\RPC;
 
 if(!empty($_POST)){
-	$login_rpc = new RPC("LoginExchange");
+	$login_rpc = new RPC('login');
 	$user = $_POST['loginUN'];
 	$usernamepasswd = serialize(array($user, $_POST['loginPW']));
+
 	$response = $login_rpc->call($usernamepasswd);
-	if ($response==="S"){
+	if ($response==='S'){
 		$_SESSION['username'] = $user;
 		header('Location: index.php');
-	}
-	else {
+	} else {
 		header('Location: login.php?success=F');
 	}
 }
 
-if(isset($_GET['success'])){
-	if($_GET['success']==="F"){
-		echo "<script type='text/javascript'>alert('Failed to Log In! Try Again.');</script>";
-	}
+if (isset($_GET['success']) && $_GET['success'] === 'F') {
+	echo "<script type='text/javascript'>alert('Failed to Log In! Try Again.');</script>";
 }
 ?>
 
-<?php include 'header.php';?>
+<?php include 'header.php' ?>
 
 <div class="uaBody">
 	<div class="Content">
@@ -42,4 +40,4 @@ if(isset($_GET['success'])){
 </div>
 
 
-<?php include 'footer.php';?>
+<?php include 'footer.php' ?>

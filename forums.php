@@ -12,21 +12,22 @@ $getForums = serialize(array("getForums"));
 $response = $forums_rpc->call($getForums);
 ?>
 
-<?php include 'header.php';?>
+<?php include 'header.php' ?>
 
 <div class="Body">
 	<div class="Content">
 		<h1>Forums</h1>
 		<?php
 		$unserArr = unserialize($response);
-		foreach ($unserArr as $forumArr){
+		foreach ($unserArr as $forumArr) {
 			echo
-			'<table>
+				'<table>
 				<tr>
 					<td>
-                        		<a href="threads.php?forumID=' . $forumArr['ForumID'] . '&forumName=' . $forumArr['Name'] . '>' . $forumArr['Name'] .'</a>
-                    			</td>
-						<a href="threads.php?forumID=' . $forumArr['ForumID'] . '>' . $forumArr['Name'] .'</a>
+					<a href="threads.php?forumID=' . $forumArr['ForumID'] . '&forumName=' . $forumArr['Name'] . '>' . $forumArr['Name'] . '</a>
+					</td>
+					<td>
+						<a href="threads.php?forumID=' . $forumArr['ForumID'] . '>' . $forumArr['Name'] . '</a>
 					</td>
 				</tr>
 			</table>';
@@ -35,4 +36,4 @@ $response = $forums_rpc->call($getForums);
 	</div>
 </div>
 
-<?php include 'footer.php';?>
+<?php include 'footer.php' ?>
