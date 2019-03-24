@@ -8,31 +8,41 @@ use PhpAmqpLib\Message\AMQPMessage;
 class RPC
 {
 	private $channel;
-	private $callback_queue;
+	private $response_queue;
 	private $response;
 	private $corr_id;
 	private $exchange;
 
-	public function __construct($exchange)
+	public function __construct($flow)
 	{
-		require_once 'configs/rabbitServer.php';
-		require_once 'configs/authCredentials.php';
-		$this->exchange = $exchange;
+
+		switch($flow) {
+			case 'login':
+				$this->exchange = 'LoginExchange';
+				$vhost = 'userAuthentication';
+				break;
+			case 'register':
+				$this->exchange = 'RegisterExchange';
+				$vhost = 'userAuthentication';
+			case 'messageBoard':
+				$this->exchange = 'MessageBoardExchange';
+				$vhost = 'messageBoard';
+		}
 
 		$connection = new AMQPStreamConnection(
-			$rabbit_host,
-			$rabbit_port,
-			$rabbit_user,
-			$rabbit_pass,
-			$rabbit_vhost
+			'', //host
+			'', // port
+			'', // user 
+			'', // pass
+			$vhost, //vhost
 		);
 
 		$this->channel = $connection->channel();
-		$this->channel->exchange_declare($exchange, 'direct', false, false, false);
-		list($this->callback_queue,, ) = $this->channel->queue_declare('', false, true, false, false);
-		$this->channel->queue_bind($queue_name, $exchange, $exchange . '_req');
+		$this->channel->exchange_declare($this->exchange, 'direct', false, false, false);
+		list($this->response_queue,, ) = $this->channel->queue_declare('', false, true, false, false);
+		$this->channel->queue_bind($this->response_queue, $this->exchange, $this->exchange . '_req');
 		$this->channel->basic_consume(
-			$this->callback_queue,
+			$this->response_queue,
 			'',
 			false,
 			true,
@@ -42,27 +52,27 @@ class RPC
 		);
 	}
 
-	public function onResponse($rep)
+	public function onResponse($resp)
 	{
-		if ($rep->get('correlation_id') == $this->corr_id) {
-			$this->response = $rep->body;
+		if ($resp->get('correlation_id') == $this->corr_id) {
+			$this->response = $resp->body;
 		}
 	}
 
-	public function call($n)
+	public function call($serialized_data)
 	{
 		$this->response = null;
 		$this->corr_id = uniqid();
 
 		$msg = new AMQPMessage(
-			$n,
+			$serialized_data,
 			array(
 				'correlation_id' => $this->corr_id,
-				'reply_to' => $this->callback_queue
+				'reply_to' => $this->response_queue
 			)
 		);
 
-		$this->channel->basic_publish($msg, $this->exchange, '');
+		$this->channel->basic_publish($msg, $this->exchange, $this->exchange . '_req');
 		while (!$this->response) {
 			$this->channel->wait();
 		}
