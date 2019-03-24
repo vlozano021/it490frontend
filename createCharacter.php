@@ -232,13 +232,11 @@ if(isset($_GET['success'])){
 					<input type="number" name="hkit" >
 					<br>
 					<h3>Equipment</h3>
-					Add Equipment:&nbsp;
 					<input type="button" value="Add Equipment" onclick="addEquipment()"></input>
 					<div id="addEquipment"><select name="equipment" id="Equipment">
 					</select></div>
 					<div id="moreEquipment"></div>
 					<h3>Spells:</h3>
-					Add Spell:&nbsp;
 					<input type="button" value="Add Spell" onclick="addSpell()"></input>
 					<br>
 					<div id="addSpell"><select name="spell" id="Spell">
