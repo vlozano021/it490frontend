@@ -1,5 +1,9 @@
-<?php 
+<?php
 session_start();
+if (!isset($_SESSION['user_id'])) {
+	header('Location: login.php');
+}
+
 require_once 'RPC.php';
 use rabbit\RPC;
 
@@ -37,7 +41,7 @@ if(isset($_GET['success'])){
 	<div class="Content">
 		<?php
 		$Thread = unserialize($response1);
-		echo 
+		echo
 			'<h1>' . $Thread['Name'] . '</h1>
 			<p>' . $Thread['Content'] . '</p><br>
 			<p>' . $Thread['User'] . ' - ' . $Thread['Timestamp'] . '</p>'
@@ -49,13 +53,13 @@ if(isset($_GET['success'])){
 			echo
 			'<table>
 				<tr>
-					<td>' 
-					. $repliesArr['Content'] .  
+					<td>'
+					. $repliesArr['Content'] .
                     '</td>
 				</tr>
 				<tr>
 					<td>'
-					. $repliesArr['User'] . ' - ' . $repliesArr['Timestamp'] . 
+					. $repliesArr['User'] . ' - ' . $repliesArr['Timestamp'] .
 					'</td>
 				</tr>
 			</table>';

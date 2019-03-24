@@ -1,5 +1,9 @@
-<?php 
+<?php
 session_start();
+if (!isset($_SESSION['user_id'])) {
+	header('Location: login.php');
+}
+
 require_once 'RPC.php';
 use rabbit\RPC;
 
@@ -31,7 +35,7 @@ $response = $threads_rpc->call($getThreads);
 				</tr>
 				<tr>
 					<td>'
-						 . $threadArr['User'] . ' - ' . $threadArr['Timestamp'] . 
+						 . $threadArr['User'] . ' - ' . $threadArr['Timestamp'] .
 					'</td>
 				</tr>
 			</table>';
