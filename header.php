@@ -11,13 +11,7 @@ session_start();
 <body>
 	<div class="navBar">
 		<a href="index.php">Home</a>
-		<div class="dropdown">
-			<button class="dropbtn">Character &#9662;</button>
-			<div class="dropdownContent">
-				<a href="characterdashboard.php">Manage Characters</a>
-				<a href="createCharacter.php">Create a Character</a>
-			</div>
-		</div>
+		<a href="createCharacter.php">Create Character</a>
 		<a href="forums.php">Forums</a>
 		<?php
 			if(isset($_SESSION['username']))
