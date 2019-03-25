@@ -29,7 +29,7 @@ $response = $threads_rpc->call($getThreads);
 			'<table>
 				<tr>
 					<td>
-                        <a href="replies.php?threadID=' . $threadArr['ThreadID'] .  '>' . $threadArr['Name'] .
+                        <a href="replies.php?threadID=' . $threadArr['ThreadID'] .  '">' . $threadArr['Name'] .
                         '</a><br>' . $threadArr['Content'] .
                     '</td>
 				</tr>
