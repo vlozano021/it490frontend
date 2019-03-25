@@ -31,6 +31,11 @@ $response = $forums_rpc->call($getForums);
 				<a href="threads.php?forumID=' . $forumArr['ForumID'] . '&forumName=' . $forumArr['Name'] . '">' . $forumArr['Name'] . '</a>
 				</td>
 			</tr>
+			<tr>
+				<td>
+					<p>' . $forumArr['Description'] . '</p>
+				</td>
+			</tr>
 			</table>';
 		}
 		?>
