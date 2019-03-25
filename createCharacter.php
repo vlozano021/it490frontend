@@ -6,6 +6,7 @@ use rabbit\RPC;
 if(!empty($_POST)){
 	$createCharacter_rpc = new RPC("storeCharacter");
 	$characterArr = array(
+		"username" => $_SESSION['username'],
 		"characterName" => $_POST['characterName'],
 		"age" => $_POST['age'],
 		"sex" => $_POST['sex'],
