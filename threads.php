@@ -21,7 +21,7 @@ $response = $threads_rpc->call($getThreads);
 		$ForumName = $_GET['forumName'];
 		echo '<h1>' . $ForumName . '</h1>';
 		?>
-		<a href="createThread.php">Create a Forum Thread</a>
+		<a href="createThread.php">Create a Forum Thread</a><br>
 		<?php
 		$unserArr = unserialize($response);
 		foreach ($unserArr as $threadArr){
