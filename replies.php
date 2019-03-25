@@ -7,23 +7,25 @@ if (!isset($_SESSION['username'])) {
 require_once 'RPC.php';
 use rabbit\RPC;
 
-$threads_rpc = new RPC("getPosts");
+$replies_rpc = new RPC("getPosts");
 $_SESSION['ThreadID'] = $_GET['threadID'];
 $getReplies = serialize(array("getReplies", $_SESSION['ThreadID']));
-$response = $threads_rpc->call($getReplies);
+$response = $replies_rpc->call($getReplies);
+
+$threads_rpc = new RPC("getPosts");
 $getThread = serialize(array("getThread", $_SESSION['ThreadID']));
 $response1 = $threads_rpc->call($getThread);
 
 if(!empty($_POST)){
 	$createReplies_rpc = new RPC("createPosts");
-	$replyINFO = array($_SESSION['ThreadID'], $_POST['Content'], $_SESSION['User']);
-	$createReplies = serialize(array("createThreads", $replyINFO));
-	$response2 = $threads_rpc->call($createReplies);
+	$replyINFO = array($_SESSION['ThreadID'], $_POST['ReplyContent'], $_SESSION['username']);
+	$createReplies = serialize(array("createReply", $replyINFO));
+	$response2 = $createReplies_rpc->call($createReplies);
 	if ($response2==="S"){
 		header('Refresh:0');
 	}
 	else {
-		header('Location: replies.php?success=F');
+		header("Location: replies.php?success=F");
 	}
 }
 
