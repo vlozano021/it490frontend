@@ -20,17 +20,15 @@ if(!empty($_POST)){
 	$createReplies = serialize(array("createThreads", $replyINFO));
 	$response2 = $threads_rpc->call($createReplies);
 	if ($response2==="S"){
-		header('Refresh:0')
+		header('Refresh:0');
 	}
 	else {
 		header('Location: replies.php?success=F');
 	}
 }
 
-if(isset($_GET['success'])){
-	if($_GET['success']==="F"){
-		echo "<script type='text/javascript'>alert('There was an error in creating a thread. Try Again.');</script>";
-	}
+if(isset($_GET['success']) && $_GET === 'F'){
+	echo "<script type='text/javascript'>alert('There was an error in creating a thread. Try Again.');</script>";
 }
 ?>
 

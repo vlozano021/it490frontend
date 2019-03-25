@@ -1,4 +1,4 @@
-<?php 
+<?php
 session_start();
 require_once 'RPC.php';
 use rabbit\RPC;
@@ -18,7 +18,7 @@ if(!empty($_POST)){
 
 if(isset($_GET['success'])){
 	if($_GET['success']==="F"){
-		echo "<script type='text/javascript'>alert("There was an error in creating a thread. Try Again.");</script>";
+		echo "<script type='text/javascript'>alert('There was an error in creating a thread. Try Again.');</script>";
 	}
 }
 
