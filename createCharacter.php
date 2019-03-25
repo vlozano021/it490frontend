@@ -1,4 +1,4 @@
-<?php 
+<?php
 session_start();
 require_once 'RPC.php';
 use rabbit\RPC;
@@ -65,7 +65,7 @@ if(!empty($_POST)){
 	$createCharacterMSG = serialize(array("createCharacter", $jsonCharacter));
 
 	$response = $createCharacter_rpc->call($createCharacterMSG);
-	
+
 	if ($response==="S"){
 		header('Location: characterdashboard.php?');
 	}
@@ -76,7 +76,7 @@ if(!empty($_POST)){
 
 if(isset($_GET['success'])){
 	if($_GET['success']==="F"){
-		echo "<script type='text/javascript'>alert("There was an error in creating a character. Try Again.");</script>";
+		echo "<script type='text/javascript'>alert('There was an error in creating a character. Try Again.');</script>";
 	}
 }
 

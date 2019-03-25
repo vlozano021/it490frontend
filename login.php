@@ -1,4 +1,4 @@
-<?php 
+<?php
 session_start();
 require_once 'RPC.php';
 use rabbit\RPC;
@@ -33,7 +33,7 @@ if (isset($_GET['success']) && $_GET['success'] === 'F') {
 			<h4>Password:</h4>
 			<input type="password" name="loginPW" required>
 			<br><br>
-			Don't have an account? <a href="signup.html">Sign Up</a><br><br>
+			Don't have an account? <a href="signup.php">Sign Up</a><br><br>
 			<input type="submit" name="loginSubmit" value="Log In">
 		</form>
 	</div>

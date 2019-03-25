@@ -20,34 +20,40 @@ class RPC
 			case 'login':
 				$this->exchange = 'LoginExchange';
 				$vhost = 'authentication';
+				$user = 'auth_user';
 				break;
 			case 'register':
 				$this->exchange = 'RegisterExchange';
 				$vhost = 'authentication';
+				$user = 'auth_user';
 				break;
 			case 'getPosts':
 				$this->exchange = 'GetPostsExchange';
 				$vhost = 'messageBoard';
+				$user = 'forums_user';
 				break;
 			case 'createPosts':
 				$this->exchange = 'CreatePostsExchange';
 				$vhost = 'messageBoard';
+				$user = 'forums_user';
 				break;
 			case 'storeCharacter':
 				$this->exchange = 'StoreExchange';
 				$vhost = 'storage';
+				$user = 'storage_user';
 				break;
 			case 'storeUserData':
 				$this->exchange = 'RetrievalExchange';
 				$vhost = 'storage';
+				$user = 'storage_user';
 				break;
 		}
 
 		$connection = new AMQPStreamConnection(
 			'', //host
-			'', // port
-			'', // user
-			'', // pass
+			5672, // port
+			$user, // username
+			'pass', // password
 			$vhost, //vhost
 		);
 
