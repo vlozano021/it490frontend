@@ -7,8 +7,8 @@ if (!isset($_SESSION['username'])) {
 require_once 'RPC.php';
 use rabbit\RPC;
 
-$forums_rpc = new RPC("GetPostsExchange");
-$getForums = serialize(array("getForums"));
+$characterdashboard_rpc = new RPC("RetrieveExchange");
+$getCharacters = serialize(array("getCharacter"));
 $response = $forums_rpc->call($getForums);
 ?>
 
@@ -16,19 +16,21 @@ $response = $forums_rpc->call($getForums);
 
 <div class="Body">
 	<div class="Content">
-		<h1>Forums</h1>
+		<h1>Character Dashboard</h1>
 		<?php
 		$unserArr = unserialize($response);
-		foreach ($unserArr as $forumArr) {
+		foreach ($unserArr as $charArr) {
 			echo
-				'<table>
+			'<table>
 				<tr>
 					<td>
-					<a href="threads.php?forumID=' . $forumArr['ForumID'] . '&forumName=' . $forumArr['Name'] . '>' . $forumArr['Name'] . '</a>
-					</td>
+						Character Name:' . $charArr['Name'] .
+					'</td>
+				</tr>
+				<tr>
 					<td>
-						<a href="threads.php?forumID=' . $forumArr['ForumID'] . '>' . $forumArr['Name'] . '</a>
-					</td>
+						Race: ' . $charArr['Race'] . ' | Class: ' . $charArr['Class'] .
+					'</td>
 				</tr>
 			</table>';
 		}
