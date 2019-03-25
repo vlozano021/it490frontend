@@ -33,7 +33,7 @@ if(isset($_GET['success'])){
 			Title:
 			<input type="text" name="Name" required>
 			<br><br>
-			Content:<br> <textarea name="Content" form="createaThreadForm" required></textarea>
+			Content:<br> <textarea name="Content" form="createThread" required></textarea>
 			<br><br>
 			<input type="submit" name="createThreadSubmit" value="Create Thread">
 		</form>
