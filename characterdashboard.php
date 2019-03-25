@@ -7,7 +7,7 @@ if (!isset($_SESSION['username'])) {
 require_once 'RPC.php';
 use rabbit\RPC;
 
-$characterdashboard_rpc = new RPC("RetrieveExchange");
+$characterdashboard_rpc = new RPC("storeUserData");
 $getCharacters = serialize(array("getCharacter"));
 $response = $forums_rpc->call($getForums);
 ?>

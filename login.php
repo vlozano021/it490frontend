@@ -4,7 +4,7 @@ require_once 'RPC.php';
 use rabbit\RPC;
 
 if(!empty($_POST)){
-	$login_rpc = new RPC("LoginExchange");
+	$login_rpc = new RPC("login");
 	$user = $_POST['loginUN'];
 	$usernamepasswd = serialize(array($user, $_POST['loginPW']));
 

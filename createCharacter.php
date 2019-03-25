@@ -4,7 +4,7 @@ require_once 'RPC.php';
 use rabbit\RPC;
 
 if(!empty($_POST)){
-	$createCharacter_rpc = new RPC("StoreExchange");
+	$createCharacter_rpc = new RPC("storeCharacter");
 	$characterArr = array(
 		"characterName" => $_POST['characterName'],
 		"age" => $_POST['age'],

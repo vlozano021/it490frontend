@@ -4,7 +4,7 @@ require_once 'RPC.php';
 use rabbit\RPC;
 
 if(!empty($_POST)){
-	$createThreads_rpc = new RPC("createExchange");
+	$createThreads_rpc = new RPC("createPosts");
 	$threadINFO = array($_SESSION['ForumID'], $_POST['Name'], $_POST['Content'], $_SESSION['User']);
 	$createThreads = serialize(array("createThreads", $threadINFO));
 	$response = $threads_rpc->call($createThreads);
