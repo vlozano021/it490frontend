@@ -25,7 +25,7 @@ if(!empty($_POST)){
 		header('Refresh:0');
 	}
 	else {
-		header("Location: replies.php?success=F");
+		header('Location: replies.php?threadID=' . $_SESSION['ThreadID'] . '&success=F');
 	}
 }
 
