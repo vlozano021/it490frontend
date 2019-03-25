@@ -7,6 +7,7 @@ use PhpAmqpLib\Message\AMQPMessage;
 
 class RPC
 {
+	private $connection;
 	private $channel;
 	private $response_queue;
 	private $response;
@@ -37,19 +38,19 @@ class RPC
 				$vhost = 'messageBoard';
 				$user = 'forums_user';
 				break;
-			case 'storeCharacter':
+			case 'StoreJSON':
 				$this->exchange = 'StoreExchange';
 				$vhost = 'storage';
 				$user = 'storage_user';
 				break;
-			case 'storeUserData':
-				$this->exchange = 'RetrievalExchange';
+			case 'RetrieveJSON':
+				$this->exchange = 'RetrieveExchange';
 				$vhost = 'storage';
 				$user = 'storage_user';
 				break;
 		}
 
-		$connection = new AMQPStreamConnection(
+		$this->connection = new AMQPStreamConnection(
 			'172.17.0.2', //host
 			5672, // port
 			$user, // username
@@ -57,7 +58,7 @@ class RPC
 			$vhost, //vhost
 		);
 
-		$this->channel = $connection->channel();
+		$this->channel = $this->connection->channel();
 		$this->channel->exchange_declare($this->exchange, 'direct', false, false, false);
 		list($this->response_queue,, ) = $this->channel->queue_declare('', false, false, true, true);
 		$this->channel->basic_consume(
@@ -95,6 +96,9 @@ class RPC
 		while (!$this->response) {
 			$this->channel->wait();
 		}
+
+		$this->channel->close();
+		$this->connection->close();
 
 		return $this->response;
 	}

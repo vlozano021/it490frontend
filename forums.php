@@ -18,18 +18,19 @@ $response = $forums_rpc->call($getForums);
 	<div class="Content">
 		<h1>Forums</h1>
 		<?php
+		// echo "<h2>";
+		// print_r($response);
+		// echo "<h2>";
 		$unserArr = unserialize($response);
+
 		foreach ($unserArr as $forumArr) {
 			echo
-				'<table>
-				<tr>
-					<td>
-					<a href="threads.php?forumID=' . $forumArr['ForumID'] . '&forumName=' . $forumArr['Name'] . '>' . $forumArr['Name'] . '</a>
-					</td>
-					<td>
-						<a href="threads.php?forumID=' . $forumArr['ForumID'] . '>' . $forumArr['Name'] . '</a>
-					</td>
-				</tr>
+			'<table>
+			<tr>
+				<td>
+				<a href="threads.php?forumID=' . $forumArr['ForumID'] . '&forumName=' . $forumArr['Name'] . '">' . $forumArr['Name'] . '</a>
+				</td>
+			</tr>
 			</table>';
 		}
 		?>
