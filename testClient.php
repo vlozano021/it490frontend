@@ -1,6 +1,4 @@
 <?php
-namespace rabbit;
-
 require_once '../vendor/autoload.php';
 use PhpAmqpLib\Connection\AMQPStreamConnection;
 use PhpAmqpLib\Message\AMQPMessage;
@@ -59,7 +57,7 @@ class RPC
 
 		$this->channel = $connection->channel();
 		$this->channel->exchange_declare($this->exchange, 'direct', false, false, false);
-		list($this->response_queue,, ) = $this->channel->queue_declare('', false, false, true, true);
+		list($this->response_queue,,) = $this->channel->queue_declare('', false, false, true, true);
 		$this->channel->basic_consume(
 			$this->response_queue,
 			'',
@@ -99,4 +97,7 @@ class RPC
 		return $this->response;
 	}
 }
-?>
+
+echo "Calling RPC\n";
+$c = new RPC('login');
+echo $c->call(serialize(array('dog', 'pass')));

@@ -1,4 +1,4 @@
-<?php 
+<?php
 session_start();
 require_once 'RPC.php';
 use rabbit\RPC;
@@ -7,7 +7,7 @@ if(!empty($_POST)){
 	$signup_rpc = new RPC("register");
 	$user = $_POST['signUN'];
 	$usernamepasswd = serialize(array($user, $_POST['signPW']));
-	$response = $login_rpc->call($usernamepasswd);
+	$response = $signup_rpc->call($usernamepasswd);
 	if ($response==="S"){
 		header('Location: login.php');
 	}

@@ -9,11 +9,11 @@ if(!empty($_POST)){
 	$usernamepasswd = serialize(array($user, $_POST['loginPW']));
 
 	$response = $login_rpc->call($usernamepasswd);
-	if ($response==='S'){
+	if ($response === 'S'){
 		$_SESSION['username'] = $user;
-		header('Location: index.php');
+		header("Location: index.php");
 	} else {
-		header('Location: login.php?success=F');
+		header("Location: login.php?success=F");
 	}
 }
 
