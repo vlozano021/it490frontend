@@ -44,7 +44,7 @@ if(isset($_GET['success']) && $_GET === 'F'){
 		echo
 			'<h1>' . $Thread['Name'] . '</h1>
 			<p>' . $Thread['Content'] . '</p><br>
-			<p>' . $Thread['User'] . ' - ' . $Thread['Timestamp'] . '</p>'
+			<p>' . $Thread['User'] . ' - ' . $Thread['Timestamp'] . '</p>';
 
 		?>
 		<?php
