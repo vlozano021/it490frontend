@@ -61,14 +61,18 @@ if(!empty($_POST)) {
 		"hitDice" => ""
 	);
 
-	$jsonCharacter = json_encode($characterArr);
+	foreach ($characterArr as $key => $value) {
+		if(isset($_POST[$key])){
+			$characterArr[$key]=$_POST[$key];
+		}
+	}
 
-	$createCharacterMSG = serialize(array("createCharacter", $jsonCharacter));
+	$createCharacterMSG = serialize(array("updateCharacter", $characterArr));
 
 	$response = $createCharacter_rpc->call($createCharacterMSG);
 
 	if ($response==="S"){
-		header('Location: characterdashboard.php?');
+		header('Location: index.php?');
 	}
 	else {
 		header('Location: createCharacter.php?success=F');
