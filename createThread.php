@@ -5,11 +5,11 @@ use rabbit\RPC;
 
 if(!empty($_POST)){
 	$createThreads_rpc = new RPC("createPosts");
-	$threadINFO = array($_SESSION['ForumID'], $_POST['Name'], $_POST['Content'], $_SESSION['User']);
-	$createThreads = serialize(array("createThreads", $threadINFO));
-	$response = $threads_rpc->call($createThreads);
+	$threadINFO = array($_SESSION['ForumID'], $_POST['Name'], $_POST['Content'], $_SESSION['username']);
+	$createThreads = serialize(array("createThread", $threadINFO));
+	$response = $createThreads_rpc->call($createThreads);
 	if ($response==="S"){
-		header('Location: threads.php?forumID='.$_SESSION[ForumID]);
+		header('Location: threads.php?forumID='.$_SESSION['ForumID']);
 	}
 	else {
 		header('Location: createThread.php?success=F');

@@ -94,7 +94,7 @@ class RPC
 
 		$this->channel->basic_publish($msg, $this->exchange, $this->exchange . '_req');
 		while (!$this->response) {
-			$this->channel->wait();
+			$this->channel->wait(null, false, 3);
 		}
 
 		$this->channel->close();
