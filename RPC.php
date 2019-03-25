@@ -19,20 +19,34 @@ class RPC
 		switch($flow) {
 			case 'login':
 				$this->exchange = 'LoginExchange';
-				$vhost = 'userAuthentication';
+				$vhost = 'authentication';
 				break;
 			case 'register':
 				$this->exchange = 'RegisterExchange';
-				$vhost = 'userAuthentication';
-			case 'messageBoard':
-				$this->exchange = 'MessageBoardExchange';
+				$vhost = 'authentication';
+				break;
+			case 'getPosts':
+				$this->exchange = 'GetPostsExchange';
 				$vhost = 'messageBoard';
+				break;
+			case 'createPosts':
+				$this->exchange = 'CreatePostsExchange';
+				$vhost = 'messageBoard';
+				break;
+			case 'storeCharacter':
+				$this->exchange = 'StoreExchange';
+				$vhost = 'storage';
+				break;
+			case 'storeUserData':
+				$this->exchange = 'RetrievalExchange';
+				$vhost = 'storage';
+				break;
 		}
 
 		$connection = new AMQPStreamConnection(
 			'', //host
 			'', // port
-			'', // user 
+			'', // user
 			'', // pass
 			$vhost, //vhost
 		);
