@@ -27,7 +27,7 @@ if (!isset($_GET['load'])) {
 		<h1>Character Dashboard</h1>
 		<?php
 		if (isset($_GET['load'])) {
-			//Failed to get Characters
+			echo "<script type='text/javascript'>alert('Failed to get characters!');</script>";
 		} else {
 			foreach ($characters as $character) {
 				echo
