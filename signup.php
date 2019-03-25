@@ -4,7 +4,7 @@ require_once 'RPC.php';
 use rabbit\RPC;
 
 if(!empty($_POST)){
-	$signup_rpc = new RPC("SignupExchange");
+	$signup_rpc = new RPC("RegisterExchange");
 	$user = $_POST['signUN'];
 	$usernamepasswd = serialize(array($user, $_POST['signPW']));
 	$response = $login_rpc->call($usernamepasswd);

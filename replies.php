@@ -7,7 +7,7 @@ if (!isset($_SESSION['username'])) {
 require_once 'RPC.php';
 use rabbit\RPC;
 
-$threads_rpc = new RPC("messageboardExchange");
+$threads_rpc = new RPC("GetPostsExchange");
 $_SESSION['ThreadID'] = $_GET['threadID'];
 $getReplies = serialize(array("getReplies", $_SESSION['ThreadID']));
 $response = $threads_rpc->call($getReplies);
@@ -15,7 +15,7 @@ $getThread = serialize(array("getThread", $_SESSION['ThreadID']));
 $response1 = $threads_rpc->call($getThread);
 
 if(!empty($_POST)){
-	$createReplies_rpc = new RPC("createExchange");
+	$createReplies_rpc = new RPC("CreatePostsExchange");
 	$replyINFO = array($_SESSION['ThreadID'], $_POST['Content'], $_SESSION['User']);
 	$createReplies = serialize(array("createThreads", $replyINFO));
 	$response2 = $threads_rpc->call($createReplies);

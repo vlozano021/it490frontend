@@ -7,7 +7,7 @@ if (!isset($_SESSION['username'])) {
 require_once 'RPC.php';
 use rabbit\RPC;
 
-$forums_rpc = new RPC("messageboardExchange");
+$forums_rpc = new RPC("GetPostsExchange");
 $getForums = serialize(array("getForums"));
 $response = $forums_rpc->call($getForums);
 ?>

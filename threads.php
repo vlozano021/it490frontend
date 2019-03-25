@@ -7,7 +7,7 @@ if (!isset($_SESSION['username'])) {
 require_once 'RPC.php';
 use rabbit\RPC;
 
-$threads_rpc = new RPC("messageBoardExchange");
+$threads_rpc = new RPC("GetPostsExchange");
 $_SESSION['ForumID'] = $_GET['forumID'];
 $getThreads = serialize(array("getThreads", $_SESSION['ForumID']));
 $response = $threads_rpc->call($getThreads);
