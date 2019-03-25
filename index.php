@@ -34,12 +34,12 @@ if (!isset($_GET['load'])) {
 				'<table>
 					<tr>
 						<td>
-							Character Name:' . $character['Name'] .
+							Character Name:' . $character['name'] .
 						'</td>
 					</tr>
 					<tr>
 						<td>
-							Race: ' . $character['Race'] . ' | Class: ' . $character['Class'] .
+							Race: ' . $character['race'] . ' | Class: ' . $character['class'] .
 						'</td>
 					</tr>
 				</table>';
